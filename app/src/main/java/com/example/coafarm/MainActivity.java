@@ -53,33 +53,27 @@ public class MainActivity extends AppCompatActivity {
                             , new TypeToken<List<Farm>>() {
                             }.getType());
                     for (Farm farm:farms) {
-                        dao.insert(farm);
+
+                        Farm s=dao.insert(farm);
+                        Log.v("MainActivity", "farm: " + s);
                     }
                 }
             });
         }else{
-            Toast.makeText(this,""+dao.getAll().size(),Toast.LENGTH_SHORT).show();
+
+            List<Farm> datas = dao.getAll();
+            FarmAdapter adapter = new FarmAdapter(datas);
+//            if (mRecyclerView!=null)
+//                Toast.makeText(this,""+dao.getAll().size(),Toast.LENGTH_SHORT).show();
+//            else
+//                Toast.makeText(this,"ccccc",Toast.LENGTH_SHORT).show();
+            mRecyclerView.setAdapter(adapter);
         }
 
 
      }
 
-    private String fetchDataFromApi() throws IOException {
-        URL url = new URL(API_URL);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
-        }
-
-        reader.close();
-        return response.toString();
-    }
 
 
 

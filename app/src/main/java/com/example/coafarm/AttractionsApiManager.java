@@ -36,7 +36,7 @@ public class AttractionsApiManager {
 
     private String fetchDataFromApi() throws IOException {
         URL url = new URL(API_URL);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
